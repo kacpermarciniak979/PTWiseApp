@@ -11,7 +11,6 @@ namespace PTWise.Models.Models
         Completed,
         Scheduled,
         Active,
-        Cancelled,
-
+        Cancelled
     }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTWiseApp.Web", "PTWiseApp\PTWiseApp.Web.csproj", "{3F661414-6936-413E-AA8F-2F8A3C686EA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTWiseApp.Web", "PTWiseApp\PTWiseApp.Web.csproj", "{3F661414-6936-413E-AA8F-2F8A3C686EA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTWiseApp.API", "PTWiseApp.API\PTWiseApp.API.csproj", "{75C9FC74-7672-49CC-8AA3-F5B2BD35AEC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTWiseApp.API", "PTWiseApp.API\PTWiseApp.API.csproj", "{75C9FC74-7672-49CC-8AA3-F5B2BD35AEC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
