@@ -11,9 +11,8 @@ namespace PTWise.Models.Models
     {
         [Key]
         public int Id { get; set; }
-        public Trainer Trainer { get; set; }
-        public Client Client { get; set; }
         public DateTime Date { get; set; }
+        public Appointment Appointment { get; set; }
         public int DurationMins { get; set; }
     }
 }

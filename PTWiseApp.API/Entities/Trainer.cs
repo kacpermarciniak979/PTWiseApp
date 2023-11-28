@@ -17,6 +17,8 @@ namespace PTWise.Models.Models
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Address Address { get; set; }
+        public ICollection<Client> Clients { get; } = new List<Client>();
+        public ICollection<Appointment> Appointments { get; } = new List<Appointment>();
         public string GymName { get; set; }
 
         [RegularExpression(@"[A-Za-z0-9._'%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Email address is not valid.")]
@@ -27,6 +29,5 @@ namespace PTWise.Models.Models
         [Display(Name = "Telephone")]
         [DataType(DataType.PhoneNumber)]
         public string TelephoneNumber { get; set; }
-
     }
 }

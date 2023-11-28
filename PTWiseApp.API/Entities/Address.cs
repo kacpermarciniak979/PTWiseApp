@@ -18,6 +18,14 @@ namespace PTWise.Models.Models
 
         public string Postcode { get; set; }
 
+        // 1-2-1 relationship for EITHER client OR trainer.. 
+        // will result in some NULLs but not too many
+        // fix at some point I guess (junction table?)
+
+        public Client Client { get; set; }
+
+        public Trainer Trainer { get; set; }
+
         public override string ToString()
         {
             var address = new StringBuilder();
@@ -61,12 +69,5 @@ namespace PTWise.Models.Models
                  string.IsNullOrWhiteSpace(Country) &&
                   string.IsNullOrWhiteSpace(Postcode);
         }
-
-
-        
-
-        
-
-       
     }
 }

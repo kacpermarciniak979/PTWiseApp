@@ -13,6 +13,7 @@ namespace PTWise.Models.Models
         [Required]
         public int Id { get; set; }
         public Trainer Trainer { get; set; }
+        public ICollection<Workout> Workouts { get; set; }
         public Client Client { get; set; }
         public DateTime Date { get; set; }
         public Status Status { get; set; }

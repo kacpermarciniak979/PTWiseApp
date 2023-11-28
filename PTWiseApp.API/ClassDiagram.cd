@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PTWise.Models.Models.Address">
+    <Position X="4" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAEAAAAgAAAAAKAAAAAAAAAAAAQAAQ=</HashCode>
+      <FileName>Entities\Address.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PTWise.Models.Models.Appointment">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAAAIAAAAAAAAACAAAABAAAAAAAAAAQ=</HashCode>
+      <FileName>Entities\Appointment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Trainer" />
+      <Property Name="Client" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Workouts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PTWise.Models.Models.Client">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAABAAEAgAAAAAAAAQACQAAACAAAAAgAAAAg=</HashCode>
+      <FileName>Entities\Client.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Trainer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PTWise.Models.Models.Payment">
+    <Position X="7" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAAQ=</HashCode>
+      <FileName>Entities\Payment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Client" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PTWise.Models.Models.Workout">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAABAAAQAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Workout.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Appointment" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PTWise.Models.Models.Trainer">
+    <Position X="2" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAEAgQCAAAAAAQAAQAAACAAAAAgAAAAg=</HashCode>
+      <FileName>Entities\Trainer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Clients" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="PTWise.Models.Models.Status" Collapsed="true">
+    <Position X="13.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAIAAAAAAAAAAEAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
