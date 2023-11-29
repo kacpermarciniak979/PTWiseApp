@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTWise.Models.Models
+namespace PTWiseApp.API.Entities
 {
     public enum Status
     {
