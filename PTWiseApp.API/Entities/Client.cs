@@ -13,9 +13,16 @@ namespace PTWiseApp.API.Entities
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? FirstName { get; set; } 
-        public string? LastName { get; set; } 
-        public Address Address { get; set; } = new Address();
-        public Trainer Trainer { get; set; } = new Trainer();
+        public string? LastName { get; set; }
+        [Display(Name = "Address Line 1")]
+        public string? AddressLine1 { get; set; }
+        [Display(Name = "Address Line 2")]
+        public string? AddressLine2 { get; set; }
+        public string? Country { get; set; }
+
+        public string? Postcode { get; set; }
+        public Trainer Trainer { get; set; } = null!;
+        public int TrainerId { get; set; }
         public DateTime DateOfBirth { get; set; }
         [RegularExpression(@"[A-Za-z0-9._'%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Email address is not valid.")]
         [DataType(DataType.EmailAddress)]

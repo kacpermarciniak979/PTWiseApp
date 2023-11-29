@@ -12,7 +12,7 @@ namespace PTWiseApp.API.Entities
         [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public Appointment Appointment { get; set; }
+        public Appointment Appointment { get; set; } = null!;
         public int AppointmentId { get; set; }
         public int DurationMins { get; set; }
     }

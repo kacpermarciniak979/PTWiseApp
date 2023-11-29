@@ -11,7 +11,7 @@ namespace PTWiseApp.API.Entities
     {
         [Key]
         public int Id { get; set; }
-        public Client Client { get; set; } = new Client();
+        public Client Client { get; set; } = null!;
         public int ClientId { get; set; }
         public int Amount { get; set; }
         public DateTime Date { get; set; }

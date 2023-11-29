@@ -10,9 +10,27 @@ namespace PTWiseApp.API.Data
             
         }
 
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Trainer)
+                .WithMany()
+                .HasForeignKey(a => a.TrainerId)
+                .OnDelete(DeleteBehavior.Restrict); 
+
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Client)
+                .WithMany()
+                .HasForeignKey(a => a.ClientId)
+                .OnDelete(DeleteBehavior.Restrict); 
 
             //Trainers
             modelBuilder.Entity<Trainer>().HasData(new Trainer
@@ -25,12 +43,9 @@ namespace PTWiseApp.API.Data
                 EmailAddress = "johnpalmer@ptwise.com",
                 GymName = "PT Wise Gym",
                 TelephoneNumber = "1234567890",
-                Address = new Address 
-                {
-                    AddressLine1 = "5 Geraldine Road",
-                    Country = "United Kingdom",
-                    Postcode = "WR14 3SZ"
-                }
+                AddressLine1 = "5 Geraldine Road",
+                Country = "United Kingdom",
+                Postcode = "WR14 3SZ"
             });
             modelBuilder.Entity<Trainer>().HasData(new Trainer
             {
@@ -42,12 +57,9 @@ namespace PTWiseApp.API.Data
                 EmailAddress = "benchadwick@ptwise.com",
                 GymName = "PT Wise Gym",
                 TelephoneNumber = "07496327386",
-                Address = new Address
-                {
-                    AddressLine1 = "20 Burnout Close",
-                    Country = "United Kingdom",
-                    Postcode = "WR14 1KT"
-                }
+                AddressLine1 = "20 Burnout Close",
+                Country = "United Kingdom",
+                Postcode = "WR14 1KT"
             });
 
             //Clients
@@ -60,12 +72,10 @@ namespace PTWiseApp.API.Data
                 DateOfBirth = new DateTime(2003, 01, 06),
                 EmailAddress = "kacermarciniak@gmail.com",
                 TelephoneNumber = "07465321286",
-                Address = new Address
-                {
-                    AddressLine1 = "100 Elgar Road",
-                    Country = "United Kingdom",
-                    Postcode = "WR14 3EZ"
-                },
+                AddressLine1 = "100 Elgar Road",
+                Country = "United Kingdom",
+                Postcode = "WR14 3EZ",
+                TrainerId = 1
 
             });
             modelBuilder.Entity<Client>().HasData(new Client
@@ -77,12 +87,11 @@ namespace PTWiseApp.API.Data
                 DateOfBirth = new DateTime(1995, 03, 15),
                 EmailAddress = "emily.johnson@example.com",
                 TelephoneNumber = "07894561234",
-                Address = new Address
-                {
-                    AddressLine1 = "25 Oak Street",
-                    Country = "United Kingdom",
-                    Postcode = "AB12 3CD"
-                }
+                AddressLine1 = "25 Oak Street",
+                Country = "United Kingdom",
+                Postcode = "AB12 3CD",
+                TrainerId = 2
+
 
             });
             modelBuilder.Entity<Client>().HasData(new Client
@@ -94,12 +103,11 @@ namespace PTWiseApp.API.Data
                 DateOfBirth = new DateTime(1988, 07, 22),
                 EmailAddress = "sophia.garcia@example.com",
                 TelephoneNumber = "07123456789",
-                Address = new Address
-                {
-                    AddressLine1 = "15 Maple Avenue",
-                    Country = "United Kingdom",
-                    Postcode = "XY34 9AB"
-                }
+                AddressLine1 = "15 Maple Avenue",
+                Country = "United Kingdom",
+                Postcode = "XY34 9AB",
+                TrainerId = 1
+
 
             });
             modelBuilder.Entity<Client>().HasData(new Client
@@ -111,12 +119,11 @@ namespace PTWiseApp.API.Data
                 DateOfBirth = new DateTime(1990, 11, 03),
                 EmailAddress = "daniel.smith@example.com",
                 TelephoneNumber = "07654321098",
-                Address = new Address
-                {
-                    AddressLine1 = "7 Pine Street",
-                    Country = "United Kingdom",
-                    Postcode = "CD56 8EF"
-                }
+                AddressLine1 = "7 Pine Street",
+                Country = "United Kingdom",
+                Postcode = "CD56 8EF",
+                TrainerId = 2
+
 
             });
             modelBuilder.Entity<Client>().HasData(new Client
@@ -128,12 +135,11 @@ namespace PTWiseApp.API.Data
                 DateOfBirth = new DateTime(2001, 05, 20),
                 EmailAddress = "isabella.brown@example.com",
                 TelephoneNumber = "07987654321",
-                Address = new Address
-                {
-                    AddressLine1 = "30 Elm Road",
-                    Country = "United Kingdom",
-                    Postcode = "EF67 2GH"
-                }
+                AddressLine1 = "30 Elm Road",
+                Country = "United Kingdom",
+                Postcode = "EF67 2GH",
+                TrainerId = 1
+
 
             });
             modelBuilder.Entity<Client>().HasData(new Client
@@ -145,12 +151,11 @@ namespace PTWiseApp.API.Data
                 DateOfBirth = new DateTime(1985, 12, 10),
                 EmailAddress = "oliver.davis@example.com",
                 TelephoneNumber = "07234567890",
-                Address = new Address
-                {
-                    AddressLine1 = "12 Birch Lane",
-                    Country = "United Kingdom",
-                    Postcode = "GH45 1IJ"
-                }
+                AddressLine1 = "12 Birch Lane",
+                Country = "United Kingdom",
+                Postcode = "GH45 1IJ",
+                TrainerId = 2
+
             });
 
             //Appointments
