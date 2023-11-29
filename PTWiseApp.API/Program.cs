@@ -1,5 +1,6 @@
 using PTWiseApp.API.Data;
 using Microsoft.EntityFrameworkCore;
+using PTWiseApp.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<PTWiseDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PTWiseConnection"))    
 );
+
+// AddScoped -  instances are created once in the scope of the request.
+builder.Services.AddScoped<TrainerService>();
 
 var app = builder.Build();
 

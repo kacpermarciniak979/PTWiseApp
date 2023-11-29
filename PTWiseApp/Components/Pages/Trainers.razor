@@ -1,0 +1,53 @@
+﻿@page "/trainers"
+@using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Services.Interfaces
+@inject ITrainerService trainerService
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Our Trainers</MudText>
+    <MudGrid Class="mt-8">
+        @foreach (var trainer in trainers)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center"><p>@trainer.FirstName @trainer.LastName</p> </MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <div class="d-flex justify-center">
+                            <MudText Typo="Typo.h3">$5</MudText>
+                            <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
+                        </div>
+                        <MudList Class="mx-auto mt-4" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.AddLocation">
+                                @trainer.GymName
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Email">
+                                @trainer.EmailAddress
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Phone">
+                                @trainer.TelephoneNumber
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                    <MudCardActions Class="d-flex justify-center">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+
+@code {
+    private IEnumerable<Trainer> trainers = new List<Trainer>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Call the service method to get data when the component is initialized
+        trainers = await trainerService.GetTrainersAsync();
+    }
+}
