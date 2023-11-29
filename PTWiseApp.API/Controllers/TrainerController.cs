@@ -35,5 +35,23 @@ namespace PTWiseApp.API.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult<Trainer>> GetTrainerById([FromQuery]int Id)
+        {
+            try
+            {
+                var result = await trainerService.GetTrainerByIdAsync(Id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
