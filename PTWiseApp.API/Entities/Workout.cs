@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTWise.Models.Models
+namespace PTWiseApp.API.Entities
 {
     public class Workout
     {
@@ -13,6 +13,7 @@ namespace PTWise.Models.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public Appointment Appointment { get; set; }
+        public int AppointmentId { get; set; }
         public int DurationMins { get; set; }
     }
 }
