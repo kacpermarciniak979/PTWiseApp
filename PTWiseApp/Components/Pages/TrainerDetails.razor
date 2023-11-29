@@ -1,0 +1,34 @@
+﻿@page "/trainer/{Id:int}"
+@using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Services.Interfaces
+@inject ITrainerService trainerService
+
+
+@if (trainer == null)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudContainer Class="mt-16">
+        <MudGrid Class="mt-8" Justify="Justify.Center">
+                <MudItem xs="12" sm="6" md="4">
+                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                </MudItem>
+        </MudGrid>
+    </MudContainer>
+    @trainer.FirstName
+}
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Trainer trainer { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Call the service method to get data when the component is initialized
+        trainer = await trainerService.GetTrainerByIdAsync(Id);
+    }
+}

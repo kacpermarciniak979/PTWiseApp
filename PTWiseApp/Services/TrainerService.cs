@@ -24,5 +24,18 @@ namespace PTWiseApp.Web.Services
                 return null;
             }
         }
+
+        public async Task<Trainer> GetTrainerByIdAsync(int Id)
+        {
+            try
+            {
+                // https://localhost:7155/                                 api/Trainer/GetTrainerById?Id=1
+                var result = await _httpClient.GetFromJsonAsync<Trainer>($"api/Trainer/GetTrainerById?Id={Id}");
+                return result;
+            } catch
+            {
+                return null;
+            }
+        }
     }
 }
