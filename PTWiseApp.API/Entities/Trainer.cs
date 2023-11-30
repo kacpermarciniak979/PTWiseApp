@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PTWiseApp.API.Entities
@@ -30,6 +31,7 @@ namespace PTWiseApp.API.Entities
         [Display(Name = "Telephone")]
         [DataType(DataType.PhoneNumber)]
         public string? TelephoneNumber { get; set; }
+        [JsonIgnore]
         public ICollection<Client> Clients { get; } = new List<Client>();
         public ICollection<Appointment> Appointments { get; } = new List<Appointment>();
     }
