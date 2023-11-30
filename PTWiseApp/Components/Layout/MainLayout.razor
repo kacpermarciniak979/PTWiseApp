@@ -4,29 +4,42 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-@code {
-    bool _drawerOpen = false;
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-}
-
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.SportsGymnastics" Color="Color.Inherit" Edge="Edge.End" />
-        <MudText Typo="Typo.h5" Class="ml-3">PTWise</MudText>
+        
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>
+    <MudDrawer @bind-Open="@open" Variant="DrawerVariant.Mini" Elevation="1">
+        <MudDrawerHeader>
+            <MudIconButton Icon="@Icons.Material.Filled.SportsGymnastics" Color="Color.Inherit" Edge="Edge.End" OnClick="@ToggleDrawer"> <MudText Typo="Typo.h5" Class="ml-3">PTWise</MudText></MudIconButton>
+           
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavLink Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.CalendarMonth" Match="NavLinkMatch.All">Scheduler</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Group" Match="NavLinkMatch.All">Clients</MudNavLink>
+            <MudNavLink Href="/trainers" Icon="@Icons.Material.Filled.Accessibility" Match="NavLinkMatch.All">Personal Trainers</MudNavLink>
+            <MudSpacer/>
+            <MudIconButton Edge="Edge.End" Icon="@(open ? Icons.Material.Outlined.KeyboardDoubleArrowLeft : Icons.Material.Outlined.KeyboardDoubleArrowRight)" OnClick="@ToggleDrawer" />
+        </MudNavMenu>
+    </MudDrawer>
     <MudMainContent>
-        @Body
+        <MudContainer>
+            <MudPaper Class="d-none d-lg-block mud-theme-tertiary rounded" Style="height:100%; width:100%;color:lightgrey;" Outlined="true" >
+                @Body
+            </MudPaper>
+        </MudContainer>
     </MudMainContent>
 </MudLayout>
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
-</div>
+
+@code
+{
+    bool open = false;
+
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+}
