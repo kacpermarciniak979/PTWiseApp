@@ -16,6 +16,7 @@ builder.Services.AddDbContextPool<PTWiseDbContext>(options =>
 
 // AddScoped -  instances are created once in the scope of the request.
 builder.Services.AddScoped<TrainerService>();
+builder.Services.AddScoped<ClientService>();
 
 var app = builder.Build();
 

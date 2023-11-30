@@ -1,0 +1,56 @@
+﻿@page "/clients/{Id:int}"
+@using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Services.Interfaces
+@inject IClientService clientService
+
+
+@if (client == null)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudContainer Class="mt-16">
+        <MudGrid Class="mt-8" Justify="Justify.Center">
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardMedia Image="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Random_Turtle.jpg/2560px-Random_Turtle.jpg" Height="200" />
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h4" Align="Align.Center"><p>@client.FirstName @client.LastName</p> </MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudList Class="mx-auto" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.AddLocation">
+                                @client.FirstName
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Email">
+                                @client.EmailAddress
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Phone">
+                                @client.TelephoneNumber
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                    <MudCardActions Class="d-flex justify-center">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:60%;">More Information</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+}
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Client client { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Call the service method to get data when the component is initialized
+        client = await clientService.GetClientByIdAsync(Id);
+    }
+}

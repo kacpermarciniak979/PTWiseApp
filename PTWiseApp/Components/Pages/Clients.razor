@@ -1,0 +1,48 @@
+﻿@page "/clients"
+@using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Services.Interfaces
+@inject IClientService clientService
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Find a Client</MudText>
+    <MudGrid Class="mt-8">
+        @foreach (var client in clients)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h4" Align="Align.Center"><p>@client.FirstName @client.LastName</p> </MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudList Class="mx-auto" Style="width:300px;">
+                            <MudListItem Icon="@Icons.Material.Filled.AddLocation">
+                                @client.FirstName
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Email">
+                                @client.EmailAddress
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Phone">
+                                @client.TelephoneNumber
+                            </MudListItem>
+                        </MudList>
+                    </MudCardContent>
+                    <MudCardActions Class="d-flex justify-center">
+                        <MudButton Href=@($"/clients/{@client.Id}") Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:60%;">More Information</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private IEnumerable<Client> clients = new List<Client>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Call the service method to get data when the component is initialized
+        clients = await clientService.GetClientsAsync();
+    }
+}
