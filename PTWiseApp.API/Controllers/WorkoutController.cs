@@ -6,7 +6,7 @@ namespace PTWiseApp.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class WorkoutController : Controller
+    public class WorkoutController : ControllerBase
     {
         private readonly WorkoutService workoutService;
 

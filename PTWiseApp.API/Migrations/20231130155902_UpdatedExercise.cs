@@ -45,7 +45,7 @@ namespace PTWiseApp.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Exercises",
-                columns: new[] { "Id", "Difficulty", "ExerciseType", "Name", "Reps", "RestPeriod", "Sets", "WorkoutId" },
+                columns: new[] { "Id", "Difficulty", "ExerciseType", "Name", "Reps", "RestPeriodSeconds", "Sets", "WorkoutId" },
                 values: new object[,]
                 {
                     { 1, 0, 2, "Bench Press", "6", 90, 4, 1 },

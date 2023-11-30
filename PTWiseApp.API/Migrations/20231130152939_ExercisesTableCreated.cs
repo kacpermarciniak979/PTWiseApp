@@ -21,7 +21,7 @@ namespace PTWiseApp.API.Migrations
                     ExerciseType = table.Column<int>(type: "int", nullable: false),
                     Sets = table.Column<int>(type: "int", nullable: false),
                     Reps = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RestPeriod = table.Column<int>(type: "int", nullable: false),
+                    RestPeriodSeconds = table.Column<int>(type: "int", nullable: false),
                     Difficulty = table.Column<int>(type: "int", nullable: false),
                     WorkoutId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -37,7 +37,7 @@ namespace PTWiseApp.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Exercises",
-                columns: new[] { "Id", "Name", "ExerciseType", "Sets", "Reps", "RestPeriod", "Difficulty" },
+                columns: new[] { "Id", "Name", "ExerciseType", "Sets", "Reps", "RestPeriodSeconds", "Difficulty" },
                 values: new object[,]
                 {
                                 { 1, "Bench Press", 2, 4, "6", 90, 0 },
