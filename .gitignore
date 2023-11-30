@@ -6,9 +6,6 @@
 # App settings json
 appsettings.json
 
-# .csproj
-*.csproj
-
 # User-specific files
 *.rsuser
 *.suo
