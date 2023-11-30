@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PTWiseApp.API.Data;
 
@@ -11,9 +12,11 @@ using PTWiseApp.API.Data;
 namespace PTWiseApp.API.Migrations
 {
     [DbContext(typeof(PTWiseDbContext))]
-    partial class PTWiseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231130152939_ExercisesTableCreated")]
+    partial class ExercisesTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,7 +259,7 @@ namespace PTWiseApp.API.Migrations
                     b.Property<int>("Sets")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkoutId")
+                    b.Property<int?>("WorkoutId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -264,96 +267,6 @@ namespace PTWiseApp.API.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("Exercises");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Difficulty = 0,
-                            ExerciseType = 2,
-                            Name = "Bench Press",
-                            Reps = "6",
-                            RestPeriod = 90,
-                            Sets = 4,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Difficulty = 0,
-                            ExerciseType = 2,
-                            Name = "Tricep Extensions",
-                            Reps = "8",
-                            RestPeriod = 60,
-                            Sets = 5,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Difficulty = 1,
-                            ExerciseType = 2,
-                            Name = "Squat",
-                            Reps = "8",
-                            RestPeriod = 120,
-                            Sets = 4,
-                            WorkoutId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Difficulty = 2,
-                            ExerciseType = 2,
-                            Name = "Deadlift",
-                            Reps = "6",
-                            RestPeriod = 120,
-                            Sets = 4,
-                            WorkoutId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Difficulty = 1,
-                            ExerciseType = 2,
-                            Name = "Pull-ups",
-                            Reps = "10",
-                            RestPeriod = 60,
-                            Sets = 3,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Difficulty = 1,
-                            ExerciseType = 2,
-                            Name = "Shoulder Press",
-                            Reps = "8",
-                            RestPeriod = 90,
-                            Sets = 4,
-                            WorkoutId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Difficulty = 0,
-                            ExerciseType = 2,
-                            Name = "Bicep Curls",
-                            Reps = "10",
-                            RestPeriod = 45,
-                            Sets = 3,
-                            WorkoutId = 2
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Difficulty = 1,
-                            ExerciseType = 2,
-                            Name = "Lunges",
-                            Reps = "12",
-                            RestPeriod = 60,
-                            Sets = 3,
-                            WorkoutId = 1
-                        });
                 });
 
             modelBuilder.Entity("PTWiseApp.API.Entities.Payment", b =>
@@ -482,33 +395,11 @@ namespace PTWiseApp.API.Migrations
                     b.Property<int>("DurationMins")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppointmentId");
 
                     b.ToTable("Workouts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AppointmentId = 1,
-                            Date = new DateTime(2023, 11, 30, 15, 59, 2, 103, DateTimeKind.Local).AddTicks(8690),
-                            DurationMins = 60,
-                            Name = "Bombaclaat Belly Blast"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AppointmentId = 2,
-                            Date = new DateTime(2023, 11, 30, 15, 59, 2, 103, DateTimeKind.Local).AddTicks(8746),
-                            DurationMins = 60,
-                            Name = "Marcin's Muscle Maker"
-                        });
                 });
 
             modelBuilder.Entity("PTWiseApp.API.Entities.Appointment", b =>
@@ -551,13 +442,9 @@ namespace PTWiseApp.API.Migrations
 
             modelBuilder.Entity("PTWiseApp.API.Entities.Exercise", b =>
                 {
-                    b.HasOne("PTWiseApp.API.Entities.Workout", "Workout")
+                    b.HasOne("PTWiseApp.API.Entities.Workout", null)
                         .WithMany("Exercises")
-                        .HasForeignKey("WorkoutId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Workout");
+                        .HasForeignKey("WorkoutId");
                 });
 
             modelBuilder.Entity("PTWiseApp.API.Entities.Payment", b =>

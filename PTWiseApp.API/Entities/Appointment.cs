@@ -17,7 +17,7 @@ namespace PTWiseApp.API.Entities
         public Client Client { get; set; } = null!;
         public int ClientId { get; set; }
         public DateTime Date { get; set; }
-        public Status Status { get; set; }
+        public AppointmentStatus Status { get; set; }
 
         public ICollection<Workout> Workouts { get; } = new List<Workout>();
 
