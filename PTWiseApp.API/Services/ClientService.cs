@@ -22,6 +22,7 @@ namespace PTWiseApp.API.Services
         public async Task<Client> GetClientByIdAsync(int Id)
         {
             var result = await pTWiseDbContext.Clients
+                .Include(x => x.Trainer)
                 .FirstOrDefaultAsync(x => x.Id == Id);
             return result;
         }
