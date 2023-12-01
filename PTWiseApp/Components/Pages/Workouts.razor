@@ -1,0 +1,61 @@
+﻿@page "/workouts"
+@using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Services.Interfaces
+@inject IWorkoutService workoutService
+
+@if (workouts != null)
+{
+    <MudContainer Class="mt-16">
+        <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Our Workouts</MudText>
+        <MudGrid Class="mt-8">
+            @foreach (var workout in workouts)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard Elevation="25" Class="rounded-lg pb-4">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Align="Align.Center">@workout.Name</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <div class="mt-2 d-flex justify-center">
+                                <MudRating SelectedValue="5" />
+                            </div>
+                            <div class="mt-2 d-flex justify-center">
+                            <MudList Class="mx-auto mt-4" Style="width:100%;">
+                                <MudListItem Icon="@Icons.Material.Filled.LockClock">
+                                    @workout.DurationMins minutes
+                                </MudListItem>
+                                <MudListItem Icon="@Icons.Material.Filled.Numbers">
+                                    Consists of @workout.Exercises.Count exercises
+                                </MudListItem>
+                            </MudList>
+                            </div>
+                        </MudCardContent>
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudContainer>
+}
+else
+{
+    <p>loading</p>
+}
+
+@code {
+    private IEnumerable<Workout> workouts = new List<Workout>();
+    private bool arrows = true;
+    private bool bullets = true;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
+
+    protected override async Task OnInitializedAsync()
+    {
+        workouts = await workoutService.GetWorkoutsAsync();
+    }
+}

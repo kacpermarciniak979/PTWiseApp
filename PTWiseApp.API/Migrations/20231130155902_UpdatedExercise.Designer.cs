@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PTWiseApp.API.Data;
 
@@ -11,9 +12,11 @@ using PTWiseApp.API.Data;
 namespace PTWiseApp.API.Migrations
 {
     [DbContext(typeof(PTWiseDbContext))]
-    partial class PTWiseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231130155902_UpdatedExercise")]
+    partial class UpdatedExercise
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

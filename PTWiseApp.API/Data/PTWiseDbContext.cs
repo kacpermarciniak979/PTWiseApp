@@ -15,6 +15,7 @@ namespace PTWiseApp.API.Data
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -163,7 +164,7 @@ namespace PTWiseApp.API.Data
             {
                 Id = 1,
                 Date = new DateTime(2023, 11, 28, 12, 30, 0),
-                Status = Status.Completed,
+                Status = AppointmentStatus.Completed,
                 ClientId = 6,
                 TrainerId = 1,
             });
@@ -171,7 +172,7 @@ namespace PTWiseApp.API.Data
             {
                 Id = 2,
                 Date = new DateTime(2023, 11, 28, 15, 0, 0),
-                Status = Status.Completed,
+                Status = AppointmentStatus.Completed,
                 ClientId = 5,
                 TrainerId = 1,
             });
@@ -179,7 +180,7 @@ namespace PTWiseApp.API.Data
             {
                 Id = 3,
                 Date = new DateTime(2023, 11, 30, 9, 0, 0),
-                Status = Status.Scheduled,
+                Status = AppointmentStatus.Scheduled,
                 ClientId = 4,
                 TrainerId = 1,
             });
@@ -187,10 +188,126 @@ namespace PTWiseApp.API.Data
             {
                 Id = 4,
                 Date = new DateTime(2023, 12, 5, 10, 30, 0),
-                Status = Status.Scheduled,
+                Status = AppointmentStatus.Scheduled,
                 ClientId = 2,
                 TrainerId = 2,
             });
+
+            //Exercises
+            modelBuilder.Entity<Exercise>().HasData(new Exercise{
+                Id = 1,
+                Name = "Bench Press",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 4,
+                Reps = "6",
+                RestPeriod = 90,
+                Difficulty = Difficulty.Beginner,
+                WorkoutId = 1
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 2,
+                Name = "Tricep Extensions",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 5,
+                Reps = "8",
+                RestPeriod = 60,
+                Difficulty = Difficulty.Beginner,
+                WorkoutId = 1
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 3,
+                Name = "Squat",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 4,
+                Reps = "8",
+                RestPeriod = 120,
+                Difficulty = Difficulty.Intermediate,
+                WorkoutId = 2
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 4,
+                Name = "Deadlift",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 4,
+                Reps = "6",
+                RestPeriod = 120,
+                Difficulty = Difficulty.Advanced,
+                WorkoutId = 2
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 5,
+                Name = "Pull-ups",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 3,
+                Reps = "10",
+                RestPeriod = 60,
+                Difficulty = Difficulty.Intermediate,
+                WorkoutId = 1
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 6,
+                Name = "Shoulder Press",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 4,
+                Reps = "8",
+                RestPeriod = 90,
+                Difficulty = Difficulty.Intermediate,
+                WorkoutId = 1
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 7,
+                Name = "Bicep Curls",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 3,
+                Reps = "10",
+                RestPeriod = 45,
+                Difficulty = Difficulty.Beginner,
+                WorkoutId = 2
+            });
+
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
+            {
+                Id = 8,
+                Name = "Lunges",
+                ExerciseType = ExerciseType.Weightlifting,
+                Sets = 3,
+                Reps = "12",
+                RestPeriod = 60,
+                Difficulty = Difficulty.Intermediate,
+                WorkoutId = 1
+            });
+
+            //Workouts
+            modelBuilder.Entity<Workout>().HasData(new Workout
+            {
+                Id = 1,
+                Name = "Bombaclaat Belly Blast",
+                Date = DateTime.Now,
+                AppointmentId = 1,
+                DurationMins = 60,
+            });
+
+            modelBuilder.Entity<Workout>().HasData(new Workout
+            {
+                Id = 2,
+                Name = "Marcin's Muscle Maker",
+                Date = DateTime.Now,
+                AppointmentId = 2,
+                DurationMins = 60,
+            });
+
 
             //Payments
             modelBuilder.Entity<Payment>().HasData(new Payment

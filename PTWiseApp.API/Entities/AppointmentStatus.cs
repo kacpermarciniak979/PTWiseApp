@@ -1,7 +1,7 @@
 ﻿
 namespace PTWiseApp.API.Entities
 {
-    public enum Status
+    public enum AppointmentStatus
     {
         Completed,
         Scheduled,
