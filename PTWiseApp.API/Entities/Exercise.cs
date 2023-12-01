@@ -12,7 +12,7 @@ namespace PTWiseApp.API.Entities
         public int Sets { get; set; }
         // Reps should be string - in case of "to failure", or similar.
         public string Reps { get; set; }
-        public int RestPeriod { get; set; }
+        public int RestPeriodSeconds { get; set; }
         public Difficulty Difficulty { get; set; }
         [JsonIgnore]
         public Workout Workout { get; set; }

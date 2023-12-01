@@ -200,7 +200,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 4,
                 Reps = "6",
-                RestPeriod = 90,
+                RestPeriodSeconds = 90,
                 Difficulty = Difficulty.Beginner,
                 WorkoutId = 1
             });
@@ -212,7 +212,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 5,
                 Reps = "8",
-                RestPeriod = 60,
+                RestPeriodSeconds = 60,
                 Difficulty = Difficulty.Beginner,
                 WorkoutId = 1
             });
@@ -224,7 +224,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 4,
                 Reps = "8",
-                RestPeriod = 120,
+                RestPeriodSeconds = 120,
                 Difficulty = Difficulty.Intermediate,
                 WorkoutId = 2
             });
@@ -236,7 +236,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 4,
                 Reps = "6",
-                RestPeriod = 120,
+                RestPeriodSeconds = 120,
                 Difficulty = Difficulty.Advanced,
                 WorkoutId = 2
             });
@@ -248,7 +248,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 3,
                 Reps = "10",
-                RestPeriod = 60,
+                RestPeriodSeconds = 60,
                 Difficulty = Difficulty.Intermediate,
                 WorkoutId = 1
             });
@@ -260,7 +260,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 4,
                 Reps = "8",
-                RestPeriod = 90,
+                RestPeriodSeconds = 90,
                 Difficulty = Difficulty.Intermediate,
                 WorkoutId = 1
             });
@@ -272,7 +272,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 3,
                 Reps = "10",
-                RestPeriod = 45,
+                RestPeriodSeconds = 45,
                 Difficulty = Difficulty.Beginner,
                 WorkoutId = 2
             });
@@ -284,7 +284,7 @@ namespace PTWiseApp.API.Data
                 ExerciseType = ExerciseType.Weightlifting,
                 Sets = 3,
                 Reps = "12",
-                RestPeriod = 60,
+                RestPeriodSeconds = 60,
                 Difficulty = Difficulty.Intermediate,
                 WorkoutId = 1
             });

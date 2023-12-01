@@ -253,7 +253,7 @@ namespace PTWiseApp.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RestPeriod")
+                    b.Property<int>("RestPeriodSeconds")
                         .HasColumnType("int");
 
                     b.Property<int>("Sets")

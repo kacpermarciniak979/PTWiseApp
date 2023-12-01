@@ -250,7 +250,7 @@ namespace PTWiseApp.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RestPeriod")
+                    b.Property<int>("RestPeriodSeconds")
                         .HasColumnType("int");
 
                     b.Property<int>("Sets")
@@ -273,7 +273,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Bench Press",
                             Reps = "6",
-                            RestPeriod = 90,
+                            RestPeriodSeconds = 90,
                             Sets = 4,
                             WorkoutId = 1
                         },
@@ -284,7 +284,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Tricep Extensions",
                             Reps = "8",
-                            RestPeriod = 60,
+                            RestPeriodSeconds = 60,
                             Sets = 5,
                             WorkoutId = 1
                         },
@@ -295,7 +295,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Squat",
                             Reps = "8",
-                            RestPeriod = 120,
+                            RestPeriodSeconds = 120,
                             Sets = 4,
                             WorkoutId = 2
                         },
@@ -306,7 +306,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Deadlift",
                             Reps = "6",
-                            RestPeriod = 120,
+                            RestPeriodSeconds = 120,
                             Sets = 4,
                             WorkoutId = 2
                         },
@@ -317,7 +317,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Pull-ups",
                             Reps = "10",
-                            RestPeriod = 60,
+                            RestPeriodSeconds = 60,
                             Sets = 3,
                             WorkoutId = 1
                         },
@@ -328,7 +328,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Shoulder Press",
                             Reps = "8",
-                            RestPeriod = 90,
+                            RestPeriodSeconds = 90,
                             Sets = 4,
                             WorkoutId = 1
                         },
@@ -339,7 +339,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Bicep Curls",
                             Reps = "10",
-                            RestPeriod = 45,
+                            RestPeriodSeconds = 45,
                             Sets = 3,
                             WorkoutId = 2
                         },
@@ -350,7 +350,7 @@ namespace PTWiseApp.API.Migrations
                             ExerciseType = 2,
                             Name = "Lunges",
                             Reps = "12",
-                            RestPeriod = 60,
+                            RestPeriodSeconds = 60,
                             Sets = 3,
                             WorkoutId = 1
                         });
