@@ -1,48 +1,98 @@
 ﻿@page "/clients"
 @using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Components.Pages.Dialogs
 @using PTWiseApp.Web.Services.Interfaces
 @inject IClientService clientService
+@inject IDialogService DialogService
 
 <MudContainer Class="mt-16">
     <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Find a Client</MudText>
-    <MudGrid Class="mt-8">
-        @foreach (var client in clients)
-        {
-            <MudItem xs="12" sm="6" md="4">
-                <MudCard Elevation="25" Class="rounded-lg pb-4">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h4" Align="Align.Center">@client.FirstName @client.LastName</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudList Class="mx-auto" Style="width:300px;">
-                            <MudListItem Icon="@Icons.Material.Filled.AddLocation">
-                                @client.FirstName
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Email">
-                                @client.EmailAddress
-                            </MudListItem>
-                            <MudListItem Icon="@Icons.Material.Filled.Phone">
-                                @client.TelephoneNumber
-                            </MudListItem>
-                        </MudList>
-                    </MudCardContent>
-                    <MudCardActions Class="d-flex justify-center">
-                        <MudButton Href=@($"/clients/{@client.Id}") Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:60%;">More Information</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-        }
-    </MudGrid>
+    <MudTable ServerData="@(new Func<TableState, Task<TableData<Client>>>(ServerReload))"
+              @ref="clientsTable" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info" T="Client" OnRowClick="@RowClicked">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Clients</MudText>
+            <MudSpacer />
+            <MudButton StartIcon="@Icons.Material.Filled.Add" OnClick="@((e) => ClientDialog())" Variant="Variant.Filled">Add Client</MudButton>
+            <MudSpacer />
+            <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>First Name</MudTh>
+            <MudTh>Surname</MudTh>
+            <MudTh>Telephone Number</MudTh>
+            <MudTh>Email</MudTh>
+            @* <MudTh><MudTableSortLabel SortLabel="Trainer" T="Trainer">Trainer</MudTableSortLabel></MudTh> *@
+            <MudTh>No. Appointments</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.FirstName</MudTd>
+            <MudTd>@context.LastName</MudTd>
+            <MudTd>@context.TelephoneNumber</MudTd>
+            <MudTd>@context.EmailAddress</MudTd>
+            @* <MudTd>@context.Trainer.FirstName + @context.Trainer.LastName</MudTd> *@
+            <MudTd>@context.Appointments.Count</MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>No matching records found</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Loading...</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+        </MudTable>
 </MudContainer>
 
-@code {
+    @code {
+    private MudTable<Client> clientsTable;
     private IEnumerable<Client> clients = new List<Client>();
+
+    private int totalItems;
+    private string searchString = null;
 
     protected override async Task OnInitializedAsync()
     {
         // Call the service method to get data when the component is initialized
-        clients = await clientService.GetClientsAsync();
+        // clients = await clientService.GetClientsAsync();
+    }
+
+    private async Task<TableData<Client>> ServerReload(TableState state)
+    {
+        var data = await clientService.GetClientsPagedAsync(state.Page * state.PageSize, state.PageSize, state.SortLabel, searchString);
+
+        return new TableData<Client>
+            {
+                Items = data,
+                TotalItems = data.Count()
+            };
+    }
+
+    private void OnSearch(string text)
+    {
+        searchString = text;
+        clientsTable.ReloadServerData();
+    }
+
+    public async void RowClicked(TableRowClickEventArgs<Client> client)
+    {
+        await ClientDialog(client.Item.Id);
+    }
+
+    private async Task ClientDialog(int id = 0)
+    {
+        var dialogTitle = id == 0 ? "Add Client" : "Edit Client";
+        var parameters = new DialogParameters<ClientDialog> { { "clientId", id } };
+        var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.Large, CloseButton = true, FullWidth = true };
+
+
+        var dialog = await DialogService.ShowAsync<ClientDialog>(dialogTitle, parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await clientsTable.ReloadServerData();
+        }
     }
 }

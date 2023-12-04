@@ -6,5 +6,6 @@ namespace PTWiseApp.Web.Services.Interfaces
     {
         Task<IEnumerable<Client>> GetClientsAsync();
         Task<Client> GetClientByIdAsync(int Id);
+        Task<IEnumerable<Client>> GetClientsPagedAsync(int skip, int take, string sort, string search);
     }
 }

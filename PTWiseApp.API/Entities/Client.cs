@@ -24,7 +24,7 @@ namespace PTWiseApp.API.Entities
         public string? Postcode { get; set; }
         public Trainer Trainer { get; set; } = null!;
         public int TrainerId { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         [RegularExpression(@"[A-Za-z0-9._'%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Email address is not valid.")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
