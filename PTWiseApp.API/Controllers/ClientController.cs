@@ -35,6 +35,29 @@ namespace PTWiseApp.API.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<Client>>> GetClientsPaged(
+            [FromQuery]int skip = 0,
+            [FromQuery] int take = 10,
+            [FromQuery] string sort = "",
+            [FromQuery] string search = "")
+        {
+            try
+            {
+                var result = await clientService.GetClientsPagedAsync(skip, take, sort, search);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                //return null;
+                throw;
+            }
+        }
+
+        [HttpGet]
         public async Task<ActionResult<Client>> GetClientByIdAsync([FromQuery] int Id)
         {
             try

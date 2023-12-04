@@ -1,0 +1,105 @@
+﻿@using PTWiseApp.API.Entities
+@using PTWiseApp.Web.Services.Interfaces
+@inject ISnackbar Snackbar
+@inject IClientService clientService
+@inject ITrainerService trainerService
+
+
+
+<MudDialog>
+    <DialogContent>
+        <EditForm Model="@client" OnValidSubmit="OnValidSubmit">
+            <MudGrid>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="client.Title" Variant="Variant.Outlined" Label="Title" />
+                </MudItem>
+                <MudItem xs="4">
+                    <MudTextField @bind-Value="client.FirstName" Variant="Variant.Outlined" Label="First Name" />
+                </MudItem>
+                <MudItem xs="4">
+                    <MudTextField @bind-Value="client.LastName" Variant="Variant.Outlined" Label="Surname" />
+                </MudItem>
+                <MudItem xs="4">
+                    <MudDatePicker @bind-Date="client.DateOfBirth" Label="Date of Birth" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="client.AddressLine1" Variant="Variant.Outlined" Label="Address Line 1" />
+                </MudItem>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="client.AddressLine2" Variant="Variant.Outlined" Label="Address Line 2" />
+                </MudItem>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="client.Postcode" Variant="Variant.Outlined" Label="Postcode" />
+                </MudItem>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="client.Country" Variant="Variant.Outlined" Label="Country" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="client.EmailAddress" For="@(() => client.EmailAddress)" Variant="Variant.Outlined" Label="Email" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="client.TelephoneNumber" Variant="Variant.Outlined" Label="Phone Number" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect T="int" @bind-Value="client.TrainerId" Label="Trainer" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                        @if (trainers is not null)
+                        {
+                            <MudSelectItem T="int" Value="0">None</MudSelectItem>
+                            @foreach (var trainer in trainers)
+                            {
+                                <MudSelectItem T="int" Value="trainer.Id">@trainer.FirstName @trainer.LastName - @trainer.GymName</MudSelectItem>
+                            }
+                        }
+
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Success" OnClick="OnValidSubmit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    MudForm clientForm;
+
+
+    [Parameter] public int clientId { get; set; }
+
+    private Client client = new Client();
+
+    private IEnumerable<Trainer> trainers = new List<Trainer>();
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (clientId != 0)
+        {
+            client = await clientService.GetClientByIdAsync(clientId);
+        }
+        trainers = await trainerService.GetTrainersAsync();
+    }
+
+    private async Task OnValidSubmit()
+    {
+        if (clientId == 0)
+        {
+            
+        }
+        else
+        {
+            
+        }
+
+        StateHasChanged();
+    }
+}

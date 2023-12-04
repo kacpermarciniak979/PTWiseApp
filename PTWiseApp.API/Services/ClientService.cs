@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ardalis.Result;
+using Microsoft.EntityFrameworkCore;
 using PTWiseApp.API.Data;
 using PTWiseApp.API.Entities;
+using System.Xml.Linq;
 
 namespace PTWiseApp.API.Services
 {
@@ -19,12 +21,42 @@ namespace PTWiseApp.API.Services
             return result;
         }
 
+        public async Task<List<Client>> GetClientsPagedAsync(int skip, int take, string sort, string search)
+        {
+            var clients = await pTWiseDbContext.Clients.Include(c => c.Trainer).Include(c => c.Appointments).ToListAsync();
+
+            clients = clients.Where(client =>
+            {
+                if (string.IsNullOrWhiteSpace(search))
+                    return true;
+                if (client.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if (client.LastName.Contains(search, StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if ($"{client.TelephoneNumber} {client.DateOfBirth} {client.EmailAddress}".Contains(search))
+                    return true;
+                return false;
+            }).ToList();
+
+            var pagedClients = clients.Skip(skip).Take(take).ToList();
+
+            return pagedClients;
+        }
+
         public async Task<Client> GetClientByIdAsync(int Id)
         {
             var result = await pTWiseDbContext.Clients
                 .Include(x => x.Trainer)
                 .FirstOrDefaultAsync(x => x.Id == Id);
             return result;
+        }
+
+        public async Task<Result> AddClient(Client client)
+        {
+            var result = pTWiseDbContext.Clients.Add(client);
+            await pTWiseDbContext.SaveChangesAsync();
+            return Result.Success();
+
         }
     }
 }
