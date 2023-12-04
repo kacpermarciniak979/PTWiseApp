@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Ardalis.Result;
+using Microsoft.EntityFrameworkCore;
 using PTWiseApp.API.Data;
 using PTWiseApp.API.Entities;
 using System.Xml.Linq;
@@ -48,6 +49,14 @@ namespace PTWiseApp.API.Services
                 .Include(x => x.Trainer)
                 .FirstOrDefaultAsync(x => x.Id == Id);
             return result;
+        }
+
+        public async Task<Result> AddClient(Client client)
+        {
+            var result = pTWiseDbContext.Clients.Add(client);
+            await pTWiseDbContext.SaveChangesAsync();
+            return Result.Success();
+
         }
     }
 }

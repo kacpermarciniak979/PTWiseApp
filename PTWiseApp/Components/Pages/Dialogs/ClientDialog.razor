@@ -59,7 +59,7 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Success" ButtonType="ButtonType.Submit">Ok</MudButton>
+        <MudButton Color="Color.Success" OnClick="OnValidSubmit">Ok</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -89,8 +89,16 @@
         trainers = await trainerService.GetTrainersAsync();
     }
 
-    private void OnValidSubmit(EditContext context)
+    private async Task OnValidSubmit()
     {
+        if (clientId == 0)
+        {
+            
+        }
+        else
+        {
+            
+        }
 
         StateHasChanged();
     }
